@@ -1,0 +1,54 @@
+{% extends 'aindex.html' %}
+{% block body %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="/search_admin_product_post">
+  <div class="card">
+    <div class="card-body">
+  <table width="726" height="427" border="0" class="table table-borderless table-striped table-hover">
+     <tr>
+      <td colspan="8">Category
+        <select name="jumpMenu" id="jumpMenu" onchange="MM_jumpMenu('parent',this,0)">
+         {% for i in data1 %}
+        <option value="{{ i['Category_id']}}">{{ i['Categoryname']}}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" name="button" id="button" value="Search" /></td>
+    </tr>
+    <tr>
+      <th>SL</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Image</th>
+      <th>Description</th>
+      <th>Category</th>
+      <td> </td>
+      <td>&nbsp;</td>
+    </tr>
+    {% for i in data %}
+    <tr>
+      <td>&nbsp;{{ loop.index }}</td>
+      <td>{{ i["name"] }}</td>
+      <td>&nbsp;{{ i["price"] }}</td>
+      <td><img src="{{ i['image'] }}" width="200px" height="200px" />  </td>
+      <td>&nbsp;{{ i["description"] }}</td>
+      <td>&nbsp;{{ i["Categoryname"] }}</td>
+      <td><a href="/admin_edit_product/{{ i['Product_id'] }}#abc">Edit</a></td>
+      <td><p><a href="/delete_view_admin_product_manage/{{ i['Product_id'] }}" onclick="return confirm('Are you sure!')">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+    </div>
+  </div>
+</form>
+</body>
+</html>
+
+{% endblock %}
